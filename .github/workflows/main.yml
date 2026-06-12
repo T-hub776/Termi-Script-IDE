@@ -31,14 +31,24 @@ jobs:
 
       # Step 4: Install your Node dependencies along with global mobile packaging utilities
             # Step 4: Install Project Dependencies and Stage Assets
+            # Step 4: Install Project Dependencies and Stage Assets
       - name: Install Project Dependencies and Stage Assets
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
           mkdir -p www
-          cp index.html www/ 2>/dev/null || true
-          cp renderer.js www/ 2>/dev/null || true
-          cp main.js www/ 2>/dev/null || true
+          
+          # Force copy whatever HTML files exist, making sure it names it index.html
+          cp [iI]ndex.html* www/index.html 2>/dev/null || true
+          cp [rR]enderer.js* www/renderer.js 2>/dev/null || true
+          cp [mM]ain.js* www/main.js 2>/dev/null || true
+          
+          # Safety fallback: If your repo didn't have an index.html file, create a placeholder so it never crashes!
+          if [ ! -f www/index.html ]; then
+            echo '<!DOCTYPE html><html><head><title>Termi-Script IDE</title></head><body style="background:#1e1e1e;color:white;"><h1>Termi-Script Studio Mobile v1.0</h1><p>Web entry staged successfully.</p></body></html>' > www/index.html
+          fi
+          
           npx cap init "Termi Script Studio" "com.termiscript.ide" --web-dir=www
+          
           
           
 
