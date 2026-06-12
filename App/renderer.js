@@ -1,18 +1,24 @@
 let editorInstance;
-const { exec } = require('child_process'); // Accesses native computer terminal streams 
+const { exec } = require('child_process'); 
 
 // 1. Hook into Monaco System Engine Initialization Pipelines
 require.config({ paths: { 'vs': 'node_modules/monaco-editor/min/vs' } });
 
 require(['vs/editor/editor.main'], function() {
     
-    // Register your brand new custom programming language identifier rules
+    // Register your custom programming language identifier rules
     monaco.languages.register({ id: 'customGameLang' });
 
     // Define syntax-highlighting token groups exactly matching your structural choices
     monaco.languages.setMonarchTokensProvider('customGameLang', {
         tokenizer: {
             root: [
+                // Highlight your structural framework and asset loading words
+                [/\b(import|using|module|pipeline)\b/, 'keyword.structure'],
+
+                // Highlight text output and spatial vocal media controls
+                [/\b(print|broadcast)\b/, 'keyword.output'],
+
                 // Highlight master namespace libraries and components
                 [/\b(scene3d|scene2d|playerV11|Sound|customUI|customGUI|AIUser|Trainer|Olanguage|profiler|Videos)\b/, 'keyword.module'],
                 
@@ -39,6 +45,8 @@ require(['vs/editor/editor.main'], function() {
         base: 'vs-dark',
         inherit: true,
         rules: [
+            { token: 'keyword.structure', foreground: 'ff6b6b', fontStyle: 'bold' },
+            { token: 'keyword.output', foreground: '4ecdc4', fontStyle: 'bold' },
             { token: 'keyword.module', foreground: '569cd6', fontStyle: 'bold' },
             { token: 'keyword.action', foreground: '4fc1ff' },
             { token: 'keyword.control', foreground: 'c586c0', fontStyle: 'bold' },
@@ -58,14 +66,15 @@ require(['vs/editor/editor.main'], function() {
     // Instantiate and inject the fully operational Monaco window into screen layer framework container
     editorInstance = monaco.editor.create(document.getElementById('editor-container'), {
         value: [
-            "// Welcome to your professional cross-platform IDE platform!\n",
+            "// Workspace Initializations",
+            "import \"src/assets/audio/\"",
+            "using \"physics_engine.3d\"",
+            "module scene3d",
+            "pipeline customgraph",
+            "",
             "scene3d.start.game()",
-            "scene3d.GetCoords(\"x,y,z\")",
-            "scene3d.numerate",
-            "scene3d.broken_syntax_test_line",
-            "scene3d.customgraph[{()}]",
-            "Olanguage.run_module(\"ui.html\")",
-            "sinc",
+            "print \"System Boot Complete. Loading Level Shaders...\"",
+            "broadcast \"Welcome back dev\"",
             "scene3d.close.game(0)"
         ].join('\n'),
         language: 'customGameLang',
@@ -73,7 +82,7 @@ require(['vs/editor/editor.main'], function() {
         fontSize: 14,
         fontFamily: 'Consolas, monospace',
         automaticLayout: true,
-        minimap: { enabled: true } // Creates the miniature draggable codebase layout bar found in VS Code!
+        minimap: { enabled: true }
     });
 });
 
@@ -86,17 +95,27 @@ function executeCustomCompilerCode() {
     // Simulating terminal write-out for standard cross-platform operations
     terminal.textContent += "=== RUNNING ENGINE COMPILE PASS ===\n";
     
-    // Split lines and calculate the exact return algorithms designed previously 
     let lines = codeValue.split('\n');
     let errors = 0;
     
     lines.forEach((line, i) => {
         let clean = line.trim();
-        if(clean && !clean.startsWith("//") && !clean.startsWith("scene3d.") && !clean.startsWith("Olanguage.") && !clean.match(/^(stop|break|sinc)$/)) {
+        // Skip check validations for valid global control phrases
+        if (clean && 
+            !clean.startsWith("//") && 
+            !clean.startsWith("scene3d.") && 
+            !clean.startsWith("Olanguage.") && 
+            !clean.startsWith("import ") && 
+            !clean.startsWith("using ") && 
+            !clean.startsWith("module ") && 
+            !clean.startsWith("pipeline ") && 
+            !clean.startsWith("print ") && 
+            !clean.startsWith("broadcast ") && 
+            !clean.match(/^(stop|break|sinc)$/)) {
             terminal.textContent += `❌ [Syntax Error] Line ${i+1}: Invalid keyword syntax statement format structure '${clean}'\n`;
             errors++;
         }
     });
     
     terminal.textContent += `\n🏁 Process closed via close.game() rules stack calculation. Code returned exit status value code: (${errors})`;
-}
+                }
