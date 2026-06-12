@@ -30,11 +30,16 @@ jobs:
           
 
       # Step 4: Install your Node dependencies along with global mobile packaging utilities
-            # Step 4: Install Project Dependencies
-      - name: Install Project Dependencies
+            # Step 4: Install Project Dependencies and Stage Assets
+      - name: Install Project Dependencies and Stage Assets
         run: |
           npm install @capacitor/core @capacitor/cli @capacitor/android
-          npx cap init "Termi Script Studio" "com.termiscript.ide" --web-dir=.
+          mkdir -p www
+          cp index.html www/ 2>/dev/null || true
+          cp renderer.js www/ 2>/dev/null || true
+          cp main.js www/ 2>/dev/null || true
+          npx cap init "Termi Script Studio" "com.termiscript.ide" --web-dir=www
+          
           
 
       # Step 5: Initialize the native Android container structural folders
