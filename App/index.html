@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Studio IDE - Custom Game Engine</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #1e1e1e; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        .top-nav { height: 45px; background-color: #252526; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); border-bottom: 1px solid #3c3c3c; }
+        .app-title { color: #cccccc; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; }
+        .run-btn { background-color: #0e639c; color: white; border: none; padding: 6px 16px; font-size: 12px; font-weight: bold; cursor: pointer; border-radius: 2px; transition: background 0.2s; }
+        .run-btn:hover { background-color: #1177bb; }
+        #workspace { flex: 1; display: flex; flex-direction: column; }
+        #editor-container { flex: 2; width: 100%; border-bottom: 1px solid #3c3c3c; }
+        #console-container { flex: 1; min-height: 150px; background-color: #1e1e1e; display: flex; flex-direction: column; }
+        .console-header { background-color: #252526; color: #969696; font-size: 11px; text-transform: uppercase; font-weight: bold; padding: 6px 15px; border-bottom: 1px solid #2d2d2d; }
+        #terminal-output { flex: 1; padding: 12px; margin: 0; color: #a6e22e; font-family: 'Consolas', monospace; font-size: 13px; overflow-y: auto; white-space: pre-wrap; background-color: #111111; }
+    </style>
+</head>
+<body>
+
+    <!-- VS Code / Acode Layout Top Utility Action Panel Bar -->
+    <div class="top-nav">
+        <div class="app-title">🎮 CUSTOM 3D GAME STUDIO DEVELOPER IDE</div>
+        <button class="run-btn" onclick="executeCustomCompilerCode()">▶ RUN COMPILER</button>
+    </div>
+
+    <!-- Main Active Workspace Splitter Screen Windows -->
+    <div id="workspace">
+        <div id="editor-container"></div>
+        <div id="console-container">
+            <div class="console-header">📟 Integrated Engine Compiler Output Console Logs</div>
+            <pre id="terminal-output">Ready to execute custom game scripts...</pre>
+        </div>
+    </div>
+
+    <!-- Inject Monaco Core Code Modules from downloaded node dependencies package arrays -->
+    <script src="node_modules/monaco-editor/min/vs/loader.js"></script>
+    <script src="renderer.js"></script>
+</body>
+  </html>
