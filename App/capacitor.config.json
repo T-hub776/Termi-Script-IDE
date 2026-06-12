@@ -1,0 +1,6 @@
+{
+  "appId": "com.termiscript.ide",
+  "appName": "Termi Script Studio",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}
