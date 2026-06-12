@@ -1,8 +1,5 @@
 {
-  "name": "termi-script-ide",
-  "version": "1.0.0",
-  "description": "Android Mobile Engine for Termi-Script IDE",
-  "main": "main.js",
-  "dependencies": {},
-  "devDependencies": {}
+  "name": "termi-script-studio",
+  "displayName": "Your New App Name",
+  "version": "1.0.0"
 }
