@@ -1,0 +1,15 @@
+{
+  "name": "custom-game-studio-ide",
+  "version": "1.0.0",
+  "description": "Cross-Platform Game Development IDE for Android, Linux, and Windows",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "monaco-editor": "^0.50.0"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0"
+  }
+}
